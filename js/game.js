@@ -24,7 +24,7 @@ window.onload = function () {
 	var snakeDirection = "right";
 
 	var server = [];
-	var applePoint = 10;
+	var serverPoint = 10;
 
 	var INITIAL_X_CORD = 0;
 	var INITIAL_Y_CORD = 0;
@@ -65,7 +65,7 @@ window.onload = function () {
 			default: break;
 		}
 	}, false);
-	//paintTiles();
+
 	loadImages();
 	init();
 	setInterval(() => {
@@ -90,7 +90,7 @@ window.onload = function () {
 		snakeImage["tailleft"] = document.getElementById("tailleft");
 		snakeImage["tailright"] = document.getElementById("tailright");
 
-		server.image = document.getElementById("apple");
+		server.image = document.getElementById("server");
 	}
 
 	function init() {
@@ -98,9 +98,7 @@ window.onload = function () {
 		context.clearRect(INITIAL_X_CORD, INITIAL_Y_CORD, BOARD_WIDTH, BOARD_HEIGHT + SCORE_BOARD_HEIGHT);
 		buildSnake();
 		buildServer();
-
 		drawBoard();
-		//		loopSnake();
 	}
 
 	function buildSnake() {
@@ -123,8 +121,7 @@ window.onload = function () {
 
 	function getRandomPoint() {
 		var x = Math.floor((Math.random() * (BOARD_WIDTH / MOVE_PX))) * MOVE_PX;
-		var y = Math.floor((Math.random() * ((BOARD_HEIGHT - SCORE_BOARD_HEIGHT )/ MOVE_PX))) * MOVE_PX + SCORE_BOARD_HEIGHT;
-		console.log(x, y)
+		var y = Math.floor((Math.random() * ((BOARD_HEIGHT - SCORE_BOARD_HEIGHT) / MOVE_PX))) * MOVE_PX + SCORE_BOARD_HEIGHT;
 		return { x, y };
 	}
 
@@ -156,16 +153,10 @@ window.onload = function () {
 			context.textAlign = "left";
 			context.fillText("Score : " + score, horizontalMargin, SCORE_BOARD_HEIGHT - bottomMarigin);
 
-			//context.translate(INITIAL_X_CORD, SCORE_BOARD_HEIGHT);
-
-			//drawSnake
-			//while (1) {
 			for (var i = 0; i < snakeArray.length; i++) {
 				context.drawImage(snakeImage[snakeArray[i].style], snakeArray[i].x, snakeArray[i].y);
 			}
-			//}
 
-			//drawServer
 			context.drawImage(server.image, server.x, server.y);
 		}
 
@@ -184,7 +175,6 @@ window.onload = function () {
 		} if (snakeDirection === "down") {
 			snakeArray.unshift({ x: x_temp, y: y_temp + MOVE_PX, style: "headdown" })
 		}
-		console.log(snakeArray.length);
 		var tmpItem = snakeArray.pop();
 		for (i = 1; i < snakeArray.length - 1; i++) {
 			if (snakeArray[i].y === snakeArray[i - 1].y && snakeArray[i].y === snakeArray[i + 1].y)
@@ -274,7 +264,10 @@ window.onload = function () {
 		if (snakeArray[0].x === server.x && snakeArray[0].y === server.y) {
 			snakeArray.push(tmpItem);
 			buildServer();
-			score += applePoint;
+			score += serverPoint;
+			if (score > topscore) {
+				topscore = score;
+			}
 		}
 
 		if (snakeArray[0].x === BOARD_WIDTH || snakeArray[0].y === BOARD_HEIGHT + MOVE_PX || snakeArray[0].x === 0 - MOVE_PX || snakeArray[0].y === 0) {
@@ -283,11 +276,11 @@ window.onload = function () {
 			isGameOver = true
 		}
 
-		for (let i = 1; i < snakeArray.length - 1; i++){
+		for (let i = 1; i < snakeArray.length - 1; i++) {
 			if (snakeArray[0].x === snakeArray[i].x && snakeArray[0].y === snakeArray[i].y) {
 				isGameOver = true
 			}
-				
+
 		}
 		drawBoard();
 	}
