@@ -1,6 +1,7 @@
 <html>
 
 <head>
+<link rel="stylesheet" type="text/css" href="css/style.css">
 
 </head>
 
@@ -21,9 +22,24 @@
 		<img id="tailleft" src="img/tailleft.png" width="20" height="20">
 		<img id="tailright" src="img/tailright.png" width="20" height="20">
 		<img id="server" src="img/server.png" width="20" height="20">
+		<img id="obstracle" src="img/apple.png" width="20" height="20">
 	</div>
-	<canvas id="board" height="660" width="480"></canvas>
+	
 	<script src="js/game.js"></script>
+	<script>
+		var topscore = 0;
+	</script>
+	<div class="box" onclick="startgame()">
+		<a class="button" href="#popup1">Eat many servers</a>
+	</div>
+
+	<div id="popup1" class="overlay">
+		<div class="popup">
+			<h2>Enjoy Eating Servers</h2>
+			<a class="close" href="#">&times;</a>
+			<canvas id="board" height="660" width="480"></canvas>
+		</div>
+	</div>
 </body>
 
 </html>

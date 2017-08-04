@@ -1,7 +1,7 @@
-window.onload = function () {
+startgame = function () {
 
 	var BOARD_WIDTH = 480;
-	var BOARD_HEIGHT = 640;
+	var BOARD_HEIGHT = 540;
 	var BOARD_BGCOLOR = "#24AE5E";
 
 	var SCORE_BOARD_HEIGHT = 20;
@@ -17,23 +17,34 @@ window.onload = function () {
 	var bottomMarigin = 5;
 
 	var score = 0;
-	var topscore = 0;
+	
 
 	var snakeArray = [];
 	var snakeImage = {};
 	var snakeDirection = "right";
+	var snakeSpeed;
+	var currentSpeed;
+
+	var obstracleObject = [];
 
 	var server = [];
 	var serverPoint = 10;
+	var serversCreated = 0;
 
 	var INITIAL_X_CORD = 0;
 	var INITIAL_Y_CORD = 0;
 	var MOVE_PX = 20;
 
 	var isGameOver = false;
+	var isLevelChanged = false;
 	var i = 0;
-	var tiles = [];
 	var gameOver = false;
+	var gameLevel = 1;
+	var gameLevelChange = 5;
+	var obstracleIntroLevel = 5;
+	var obstractleIntro = false;
+
+
 	document.addEventListener('keydown', (event) => {
 		if (snakeDirection === "right" && event.keyCode === 37) {
 			return
@@ -68,9 +79,17 @@ window.onload = function () {
 
 	loadImages();
 	init();
-	setInterval(() => {
-		moveSnake();
-	}, 120);
+	function setSpeed(snakeSpeed) {
+		currentSpeed = setInterval(() => {
+			console.log("snake speed in set interval " + snakeSpeed);
+			moveSnake();
+		}, snakeSpeed);
+	}
+
+	function ChangeSpeed() {
+		clearTimeout(currentSpeed);
+	}
+
 
 
 	function loadImages() {
@@ -91,14 +110,27 @@ window.onload = function () {
 		snakeImage["tailright"] = document.getElementById("tailright");
 
 		server.image = document.getElementById("server");
+		obstracleObject.image = document.getElementById("obstracle");
 	}
 
 	function init() {
-		score = 0;
+		reset();
 		context.clearRect(INITIAL_X_CORD, INITIAL_Y_CORD, BOARD_WIDTH, BOARD_HEIGHT + SCORE_BOARD_HEIGHT);
 		buildSnake();
 		buildServer();
+		if (obstractleIntro) {
+			buildObstracle();
+		}
 		drawBoard();
+		setSpeed(snakeSpeed);
+	}
+	function reset() {
+		score = 0;
+		gameLevel = 1;
+		snakeSpeed = 150
+		//snakeSpeed = 160;
+		ChangeSpeed();
+		obstractleIntro = false;
 	}
 
 	function buildSnake() {
@@ -112,11 +144,22 @@ window.onload = function () {
 
 	function buildServer() {
 		var randomPoint = getRandomPoint();
-		while (isPointOnSnake(randomPoint)) {
+		while (isPointOnSnake(randomPoint) || isPointOnObstracle(randomPoint)) {
 			randomPoint = getRandomPoint();
 		}
 		server.x = randomPoint.x;
 		server.y = randomPoint.y;
+		serversCreated += 1;
+	}
+
+	function buildObstracle() {
+		var randomPoint = getRandomPoint();
+		while (isPointOnSnake(randomPoint)) {
+			randomPoint = getRandomPoint();
+		}
+		obstracleObject.x = randomPoint.x;
+		obstracleObject.y = randomPoint.y;
+		console.log("test");
 	}
 
 	function getRandomPoint() {
@@ -129,6 +172,17 @@ window.onload = function () {
 		for (var i = 0; i < snakeArray.length; i++) {
 			if (snakeArray[i].x === randomPoint.x && snakeArray[i].y === randomPoint.y) {
 				return true;
+			}
+		}
+		return false;
+	}
+
+	function isPointOnObstracle(randomPoint) {
+		if (obstractleIntro) {
+			for (var i = 0; i < snakeArray.length; i++) {
+				if (snakeArray[i].x === randomPoint.x && snakeArray[i].y === randomPoint.y) {
+					return true;
+				}
 			}
 		}
 		return false;
@@ -150,6 +204,9 @@ window.onload = function () {
 			context.textAlign = "right";
 			context.fillText("Top Score : " + topscore, BOARD_WIDTH - horizontalMargin, SCORE_BOARD_HEIGHT - bottomMarigin);
 
+			//context.textAlign = "centre";
+			//context.fillText("Level : " + gameLevel, (BOARD_WIDTH / 2) + 8, SCORE_BOARD_HEIGHT - bottomMarigin);
+
 			context.textAlign = "left";
 			context.fillText("Score : " + score, horizontalMargin, SCORE_BOARD_HEIGHT - bottomMarigin);
 
@@ -158,6 +215,12 @@ window.onload = function () {
 			}
 
 			context.drawImage(server.image, server.x, server.y);
+			console.log("game level " + gameLevel);
+			if (obstractleIntro) {
+				context.drawImage(obstracleObject.image, obstracleObject.x, obstracleObject.y);
+			}		
+			
+			//obstracleObject
 		}
 
 	}
@@ -268,20 +331,74 @@ window.onload = function () {
 			if (score > topscore) {
 				topscore = score;
 			}
+			if ((serversCreated % gameLevelChange) == 0) {
+				if (snakeSpeed > 40) {
+					snakeSpeed -= 10;
+					ChangeSpeed();
+					setSpeed(snakeSpeed);
+				}
+				console.log("during level change" + snakeSpeed);
+				gameLevel += 1;
+				isLevelChanged = true;
+				fadeLevelChange();
+				if (gameLevel > obstracleIntroLevel) {
+					obstractleIntro = true;
+					buildObstracle();
+				}
+			}
 		}
 
 		if (snakeArray[0].x === BOARD_WIDTH || snakeArray[0].y === BOARD_HEIGHT + MOVE_PX || snakeArray[0].x === 0 - MOVE_PX || snakeArray[0].y === 0) {
-			context.fillStyle = "white"
-			context.fillText("Game Over, Please press 'R' to Restart", BOARD_WIDTH / 8, BOARD_HEIGHT / 2)
-			isGameOver = true
+			context.fillStyle = "white";
+			context.fillText("Game Over, Please press 'R' to Restart", BOARD_WIDTH / 8, BOARD_HEIGHT / 2);
+			isGameOver = true;
 		}
 
 		for (let i = 1; i < snakeArray.length - 1; i++) {
 			if (snakeArray[0].x === snakeArray[i].x && snakeArray[0].y === snakeArray[i].y) {
-				isGameOver = true
+				context.fillStyle = "white";
+				context.fillText("Game Over, Please press 'R' to Restart", BOARD_WIDTH / 8, BOARD_HEIGHT / 2);
+				isGameOver = true;
 			}
 
 		}
-		drawBoard();
+
+		if (gameLevel > obstracleIntroLevel && snakeArray[0].x === obstracleObject.x && snakeArray[0].y === obstracleObject.y) {
+			context.fillStyle = "white";
+			context.fillText("Game Over, Please press 'R' to Restart", BOARD_WIDTH / 8, BOARD_HEIGHT / 2);
+			isGameOver = true;
+		}
+		console.log("is L" + isLevelChanged);
+		//if(!isLevelChanged){
+			drawBoard();
+		//}
+		
+		function fadeLevelChange(){
+		if(isLevelChanged){
+			var alpha = 1.0, 
+			interval = setInterval(function () {
+				//context.width = context.width; // Clears the canvas
+				context.fillStyle = "rgba(255, 255, 255, " + alpha + ")";
+				context.font = "italic 50pt Arial";
+				context.fillText("   Level "+gameLevel, BOARD_WIDTH / 8, BOARD_HEIGHT / 2);
+				alpha = alpha - 0.05; // decrease opacity (fade out)
+				if (alpha < 0) {
+					//context.width = context.width;
+					clearInterval(interval);
+					isLevelChanged = false;
+				}
+			}, 50); 
+		}
+
 	}
+		
+	}
+	
+	
+	
+	// function gameOver() {
+	// 	context.fillStyle = "white";
+	// 	context.fillText("Game Over, Please press 'R' to Restart", BOARD_WIDTH / 8, BOARD_HEIGHT / 2);
+	// 	isGameOver = true;
+	// }
 }
