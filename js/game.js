@@ -346,23 +346,26 @@ startgame = function () {
 		}
 
 		if (snakeArray[0].x === BOARD_WIDTH || snakeArray[0].y === BOARD_HEIGHT + MOVE_PX || snakeArray[0].x === 0 - MOVE_PX || snakeArray[0].y === 0) {
+			context.textAlign = 'center';
 			context.fillStyle = "white";
-			context.fillText("Game Over, Please press 'R' to Restart", BOARD_WIDTH / 8, BOARD_HEIGHT / 2);
+			context.fillText("Game Over, Please press 'R' to Restart", BOARD_WIDTH / 2, BOARD_HEIGHT / 2);
 			isGameOver = true;
 		}
 
 		for (let i = 1; i < snakeArray.length - 1; i++) {
 			if (snakeArray[0].x === snakeArray[i].x && snakeArray[0].y === snakeArray[i].y) {
+				context.textAlign = 'center';
 				context.fillStyle = "white";
-				context.fillText("Game Over, Please press 'R' to Restart", BOARD_WIDTH / 8, BOARD_HEIGHT / 2);
+				context.fillText("Game Over, Please press 'R' to Restart", BOARD_WIDTH / 2, BOARD_HEIGHT / 2);
 				isGameOver = true;
 			}
 
 		}
 
 		if (gameLevel > obstracleIntroLevel && snakeArray[0].x === obstracleObject.x && snakeArray[0].y === obstracleObject.y) {
+			context.textAlign = 'center';
 			context.fillStyle = "white";
-			context.fillText("Game Over, Please press 'R' to Restart", BOARD_WIDTH / 8, BOARD_HEIGHT / 2);
+			context.fillText("Game Over, Please press 'R' to Restart", BOARD_WIDTH / 2, BOARD_HEIGHT / 2);
 			isGameOver = true;
 		}
 		console.log("is L" + isLevelChanged);
