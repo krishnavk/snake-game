@@ -1,6 +1,6 @@
 startgame = function () {
-	var BOARD_WIDTH = 480;
-	var BOARD_HEIGHT = 540;
+	var BOARD_WIDTH = 680;
+	var BOARD_HEIGHT = 440;
 	var BOARD_BGCOLOR = "#24AE5E";
 
 	var SCORE_BOARD_HEIGHT = 20;
