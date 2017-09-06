@@ -1,4 +1,5 @@
 startgame = function () {
+
 	var BOARD_WIDTH = 480;
 	var BOARD_HEIGHT = 540;
 	var BOARD_BGCOLOR = "#24AE5E";

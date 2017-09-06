@@ -34,7 +34,6 @@
   visibility: hidden;
   opacity: 0;
 }
-
 .overlay:target {
   visibility: visible;
   opacity: 1;
@@ -45,12 +44,9 @@
   padding: 20px;
   background: #fff;
   border-radius: 5px;
-  /*width: 30%;*/
+  width: 30%;
   position: relative;
   transition: all 5s ease-in-out;
-  width: 485px;
-  height: 600px;
-  margin-top: 5px;
 }
 
 .popup h2 {
