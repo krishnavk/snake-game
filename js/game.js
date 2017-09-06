@@ -89,8 +89,6 @@ startgame = function () {
 		clearTimeout(currentSpeed);
 	}
 
-
-
 	function loadImages() {
 		//Snake textures for different parts of snake body
 		snakeImage["headright"] = document.getElementById("headright");

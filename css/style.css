@@ -44,18 +44,16 @@
   margin: 70px auto;
   padding: 20px;
   background: #fff;
-  border-radius: 5px;
-  /*width: 30%;*/
   position: relative;
   transition: all 5s ease-in-out;
-  width: 90%;
-  height: 600px;
+  width: 640px;
+  height: 488px;
   margin-top: 5px;
 }
 
 canvas {
   display: table;
-  margin: 0 auto;
+  margin-left: -20px;
 }
 
 .popup h2 {
