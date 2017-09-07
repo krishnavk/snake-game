@@ -381,9 +381,10 @@ startgame = function () {
 			var alpha = 1.0, 
 			interval = setInterval(function () {
 				//context.width = context.width; // Clears the canvas
+				context.textAlign = 'top';
 				context.fillStyle = "rgba(255, 255, 255, " + alpha + ")";
-				context.font = "italic 50pt Arial";
-				context.fillText("   Level "+gameLevel, BOARD_WIDTH / 8, BOARD_HEIGHT / 2);
+				context.font = "italic 30pt Arial";
+				context.fillText("   Level "+gameLevel, BOARD_WIDTH / 3, BOARD_HEIGHT / 8);
 				alpha = alpha - 0.05; // decrease opacity (fade out)
 				if (alpha < 0) {
 					//context.width = context.width;
