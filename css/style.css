@@ -46,7 +46,7 @@
   background: #C2C96A;
   position: relative;
   transition: all 5s ease-in-out;
-  width: 640px;
+  width: 680px;
   height: 488px;
   margin-top: 5px;
 }
@@ -56,22 +56,31 @@ canvas {
   margin-left: -20px;
 }
 
-.popup h2 {
+.social-media {
+  display:block;
+  text-align:center;
+}
+
+
+.popup .social-media {
+  position: absolute;
+  top: 20px;
+  right: 70px;
+  text-decoration: none;
+  color: #333;
+}
+
+.popup h3 {
   margin-top: 0;
   color: #333;
   font-family: Tahoma, Arial, sans-serif;
   text-align: center;
 }
-.popup .close {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  transition: all 200ms;
-  font-size: 30px;
-  font-weight: bold;
-  text-decoration: none;
-  color: #333;
+
+.icon-background {
+  color: red;
 }
+
 .popup .close:hover {
   color: #06D85F;
 }

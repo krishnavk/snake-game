@@ -205,7 +205,7 @@ startgame = function () {
 			//context.fillText("Level : " + gameLevel, (BOARD_WIDTH / 2) + 8, SCORE_BOARD_HEIGHT - bottomMarigin);
 
 			context.textAlign = "left";
-			context.fillText("Score : " + score, horizontalMargin, SCORE_BOARD_HEIGHT - bottomMarigin);
+			context.fillText("Score : " + score, BOARD_WIDTH / 2.2, SCORE_BOARD_HEIGHT - bottomMarigin);
 
 			for (var i = 0; i < snakeArray.length; i++) {
 				context.drawImage(snakeImage[snakeArray[i].style], snakeArray[i].x, snakeArray[i].y);
