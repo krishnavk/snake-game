@@ -198,8 +198,8 @@ startgame = function () {
 			context.fillStyle = TEXT_COLOR;
 			context.font = TEXT_FONT;
 
-			context.textAlign = "right";
-			context.fillText("Top Score : " + topscore, BOARD_WIDTH - horizontalMargin, SCORE_BOARD_HEIGHT - bottomMarigin);
+			// context.textAlign = "right";
+			// context.fillText("Top Score : " + topscore, BOARD_WIDTH - horizontalMargin, SCORE_BOARD_HEIGHT - bottomMarigin);
 
 			//context.textAlign = "centre";
 			//context.fillText("Level : " + gameLevel, (BOARD_WIDTH / 2) + 8, SCORE_BOARD_HEIGHT - bottomMarigin);
@@ -346,29 +346,29 @@ startgame = function () {
 		}
 
 		if (snakeArray[0].x === BOARD_WIDTH || snakeArray[0].y === BOARD_HEIGHT + MOVE_PX || snakeArray[0].x === 0 - MOVE_PX || snakeArray[0].y === 0) {
-			context.textAlign = 'center';
-			context.fillStyle = "red";
-			context.font = "italic 20pt Arial";
-			context.fillText("Game Over, Please press 'R' to Restart", BOARD_WIDTH / 2, BOARD_HEIGHT / 2);
+			context.textAlign = 'bottom';
+			context.fillStyle = "white";
+			context.font = "italic 12pt Arial";
+			context.fillText("Game Over, Please press 'R' to Restart", BOARD_WIDTH / 3.4, BOARD_HEIGHT);
 			isGameOver = true;
 		}
 
 		for (let i = 1; i < snakeArray.length - 1; i++) {
 			if (snakeArray[0].x === snakeArray[i].x && snakeArray[0].y === snakeArray[i].y) {
-				context.textAlign = 'center';
-				context.fillStyle = "red";
-				context.font = "italic 20pt Arial";
-				context.fillText("Game Over, Please press 'R' to Restart", BOARD_WIDTH / 2, BOARD_HEIGHT / 2);
+				context.textAlign = 'bottom';
+				context.fillStyle = "white";
+				context.font = "italic 12pt Arial";
+				context.fillText("Game Over, Please press 'R' to Restart", BOARD_WIDTH / 3.4, BOARD_HEIGHT);
 				isGameOver = true;
 			}
 
 		}
 
 		if (gameLevel > obstracleIntroLevel && snakeArray[0].x === obstracleObject.x && snakeArray[0].y === obstracleObject.y) {
-			context.textAlign = 'center';
-			context.fillStyle = "red";
-			context.font = "italic 20pt Arial";
-			context.fillText("Game Over, Please press 'R' to Restart", BOARD_WIDTH / 2, BOARD_HEIGHT / 2);
+			context.textAlign = 'bottom';
+			context.fillStyle = "white";
+			context.font = "italic 12pt Arial";
+			context.fillText("Game Over, Please press 'R' to Restart", BOARD_WIDTH / 3.4, BOARD_HEIGHT);
 			isGameOver = true;
 		}
 		console.log("is L" + isLevelChanged);
