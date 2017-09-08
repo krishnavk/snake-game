@@ -350,6 +350,8 @@ startgame = function () {
 			context.fillStyle = "white";
 			context.font = "italic 12pt Arial";
 			context.fillText("Game Over, Please press 'R' to Restart", BOARD_WIDTH / 3.4, BOARD_HEIGHT);
+			var scoreBeforeGameOver = score;
+			document.getElementById("twitterShare").href = "https://twitter.com/home?status=I scored: " + scoreBeforeGameOver;
 			isGameOver = true;
 		}
 
@@ -359,6 +361,8 @@ startgame = function () {
 				context.fillStyle = "white";
 				context.font = "italic 12pt Arial";
 				context.fillText("Game Over, Please press 'R' to Restart", BOARD_WIDTH / 3.4, BOARD_HEIGHT);
+				var scoreBeforeGameOver = score;
+				document.getElementById("twitterShare").href = "https://twitter.com/home?status=I scored: " + scoreBeforeGameOver;
 				isGameOver = true;
 			}
 
@@ -369,6 +373,8 @@ startgame = function () {
 			context.fillStyle = "white";
 			context.font = "italic 12pt Arial";
 			context.fillText("Game Over, Please press 'R' to Restart", BOARD_WIDTH / 3.4, BOARD_HEIGHT);
+			var scoreBeforeGameOver = score;
+			document.getElementById("twitterShare").href = "https://twitter.com/home?status=I scored: " + scoreBeforeGameOver;
 			isGameOver = true;
 		}
 		console.log("is L" + isLevelChanged);
