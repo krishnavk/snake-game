@@ -351,7 +351,7 @@ startgame = function () {
 			context.font = "italic 12pt Arial";
 			context.fillText("Game Over, Please press 'R' to Restart", BOARD_WIDTH / 3.4, BOARD_HEIGHT);
 			var scoreBeforeGameOver = score;
-			document.getElementById("twitterShare").href = "https://twitter.com/home?status=I scored: " + scoreBeforeGameOver;
+			document.getElementById("twitterShare").href = "https://twitter.com/home?status=I scored: " + scoreBeforeGameOver + " %23" + randomHash(scoreBeforeGameOver);
 			isGameOver = true;
 		}
 
@@ -404,6 +404,42 @@ startgame = function () {
 		
 	}
 	
+
+	function randomHash(score){
+		var obj = { 0: "m", 1: "i", 2: "r", 3: "s", 4: "t", 5: "u", 6: "v", 7: "w", 8: "x", 9: "y"};
+		var scoreArr = score.toString().split('');
+		var randArr = [];
+		for(var i = 0; i < scoreArr.length; i++) {
+			for (var key in obj) {
+				if (scoreArr[i] == key) {
+					randArr.push(obj[key]);
+				}
+			}
+		}
+		var randomString = randArr.join('');
+
+		var specialChar = ["!", "$", "%", "&", "*", "_"];
+		var rand1 = specialChar[Math.floor(Math.random() * specialChar.length)];
+		var rand2 = specialChar[Math.floor(Math.random() * specialChar.length)];
+		var rand3 = specialChar[Math.floor(Math.random() * specialChar.length)];
+		var rand4 = specialChar[Math.floor(Math.random() * specialChar.length)];
+
+		if (randomString.length == 2){
+			return(randomString + rand1 + rand2 + rand3 + rand4);
+		}
+
+		else if (randomString.length == 3) {
+			return(randomString + rand1 + rand2 + rand3);
+		}
+		else if (randomString.length == 4){
+			return(randomString + rand1 + rand2);
+		}
+		else if (randomString.length == 5) {
+			return(randomString + rand1);
+		}
+		else
+			return(randomString);
+  }
 	
 	
 	// function gameOver() {
