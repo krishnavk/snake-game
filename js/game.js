@@ -409,42 +409,32 @@ startgame = function () {
 		
 	}
 	
+function jsonCallback(json){
+			console.log(json);
+		}	
 
 	function randomHash(score){
-		var obj = { 0: "m", 1: "i", 2: "r", 3: "s", 4: "t", 5: "u", 6: "v", 7: "w", 8: "x", 9: "y"};
-		var scoreArr = score.toString().split('');
-		var randArr = [];
-		for(var i = 0; i < scoreArr.length; i++) {
-			for (var key in obj) {
-				if (scoreArr[i] == key) {
-					randArr.push(obj[key]);
-				}
-			}
-		}
-		var randomString = randArr.join('');
+		var has = ""; 
+		
+		$.ajax({
+		async: false,
+    url: 'https://o136z8hk40.execute-api.us-east-1.amazonaws.com/prod/encode_score?score=' + score,
+    type: 'GET',
+    crossDomain: true,
+    contentType: 'application/json',
+    dataType: 'json',
+    success: function(data) {
+				console.log(data.id)
+        has = data.id//success stuff. data here is the response, not your original data
+    },
+    error: function(xhr, ajaxOptions, thrownError) {
+         console.log("test failed")//error handling stuff
+    }
+	});
 
-		var specialChar = ["!", "$", "%", "&", "*", "_"];
-		var rand1 = specialChar[Math.floor(Math.random() * specialChar.length)];
-		var rand2 = specialChar[Math.floor(Math.random() * specialChar.length)];
-		var rand3 = specialChar[Math.floor(Math.random() * specialChar.length)];
-		var rand4 = specialChar[Math.floor(Math.random() * specialChar.length)];
+	return has;
 
-		if (randomString.length == 2){
-			return(randomString + rand1 + rand2 + rand3 + rand4);
-		}
-
-		else if (randomString.length == 3) {
-			return(randomString + rand1 + rand2 + rand3);
-		}
-		else if (randomString.length == 4){
-			return(randomString + rand1 + rand2);
-		}
-		else if (randomString.length == 5) {
-			return(randomString + rand1);
-		}
-		else
-			return(randomString);
-  }
+	}
 	
 	
 	// function gameOver() {
