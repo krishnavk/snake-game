@@ -45,6 +45,10 @@ startgame = function () {
 
 
 	document.addEventListener('keydown', (event) => {
+		if (event.keyCode === 27) {
+			var escapeEvent = document.getElementById('close');
+			escapeEvent.click()
+		}
 		if (snakeDirection === "right" && event.keyCode === 37) {
 			return
 		}
@@ -80,7 +84,7 @@ startgame = function () {
 	init();
 	function setSpeed(snakeSpeed) {
 		currentSpeed = setInterval(() => {
-			console.log("snake speed in set interval " + snakeSpeed);
+			// console.log("snake speed in set interval " + snakeSpeed);
 			moveSnake();
 		}, snakeSpeed);
 	}
@@ -157,7 +161,7 @@ startgame = function () {
 		}
 		obstracleObject.x = randomPoint.x;
 		obstracleObject.y = randomPoint.y;
-		console.log("test");
+		// console.log("test");
 	}
 
 	function getRandomPoint() {
@@ -378,7 +382,7 @@ startgame = function () {
 			document.getElementById("twitterShare").href = "https://twitter.com/home?status=I scored: " + scoreBeforeGameOver;
 			isGameOver = true;
 		}
-		console.log("is L" + isLevelChanged);
+		// console.log("is L" + isLevelChanged);
 		//if(!isLevelChanged){
 			drawBoard();
 		//}
