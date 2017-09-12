@@ -124,7 +124,8 @@ startgame = function () {
 	function reset() {
 		score = 0;
 		gameLevel = 1;
-		snakeSpeed = 150
+		snakeSpeed = 150;
+		serversCreated = 0;
 		//snakeSpeed = 160;
 		ChangeSpeed();
 		obstractleIntro = false;
@@ -212,7 +213,7 @@ startgame = function () {
 			}
 
 			context.drawImage(server.image, server.x, server.y);
-			console.log("game level " + gameLevel);
+			// console.log("game level " + gameLevel);
 			if (obstractleIntro) {
 				context.drawImage(obstracleObject.image, obstracleObject.x, obstracleObject.y);
 			}		
@@ -334,7 +335,7 @@ startgame = function () {
 					ChangeSpeed();
 					setSpeed(snakeSpeed);
 				}
-				console.log("during level change" + snakeSpeed);
+				// console.log("during level change" + snakeSpeed);
 				gameLevel += 1;
 				isLevelChanged = true;
 				fadeLevelChange();
