@@ -1,7 +1,6 @@
 startgame = function () {
-
-	var BOARD_WIDTH = 480;
-	var BOARD_HEIGHT = 540;
+	var BOARD_WIDTH = 680;
+	var BOARD_HEIGHT = 440;
 	var BOARD_BGCOLOR = "#24AE5E";
 
 	var SCORE_BOARD_HEIGHT = 20;
@@ -46,6 +45,15 @@ startgame = function () {
 
 
 	document.addEventListener('keydown', (event) => {
+		if (event.keyCode === 27) {
+			var escapeEvent = document.getElementById('close');
+			escapeEvent.click()
+		}
+
+		// if (snakeDirection === "right" && (event.keyCode === 37 && event.keyCode === 38)) {
+		// 	snakeDirection = "up"
+		// }
+
 		if (snakeDirection === "right" && event.keyCode === 37) {
 			return
 		}
@@ -58,6 +66,7 @@ startgame = function () {
 		if (snakeDirection === "down" && event.keyCode === 38) {
 			return
 		}
+
 		switch (event.keyCode) {
 			case 38:
 				snakeDirection = "up";
@@ -81,7 +90,6 @@ startgame = function () {
 	init();
 	function setSpeed(snakeSpeed) {
 		currentSpeed = setInterval(() => {
-			console.log("snake speed in set interval " + snakeSpeed);
 			moveSnake();
 		}, snakeSpeed);
 	}
@@ -89,8 +97,6 @@ startgame = function () {
 	function ChangeSpeed() {
 		clearTimeout(currentSpeed);
 	}
-
-
 
 	function loadImages() {
 		//Snake textures for different parts of snake body
@@ -130,8 +136,11 @@ startgame = function () {
 		i = 0;
 		gameOver = false;
 		gameLevel = 1;
-		gameLevelChange = 5;
-		obstracleIntroLevel = 5;
+
+		snakeSpeed = 150;
+		serversCreated = 0;
+		//snakeSpeed = 160;
+		ChangeSpeed();
 		obstractleIntro = false;
 	}
 
@@ -161,7 +170,6 @@ startgame = function () {
 		}
 		obstracleObject.x = randomPoint.x;
 		obstracleObject.y = randomPoint.y;
-		console.log("test");
 	}
 
 	function getRandomPoint() {
@@ -203,21 +211,20 @@ startgame = function () {
 			context.fillStyle = TEXT_COLOR;
 			context.font = TEXT_FONT;
 
-			context.textAlign = "right";
-			context.fillText("Top Score : " + topscore, BOARD_WIDTH - horizontalMargin, SCORE_BOARD_HEIGHT - bottomMarigin);
+			// context.textAlign = "right";
+			// context.fillText("Top Score : " + topscore, BOARD_WIDTH - horizontalMargin, SCORE_BOARD_HEIGHT - bottomMarigin);
 
 			//context.textAlign = "centre";
 			//context.fillText("Level : " + gameLevel, (BOARD_WIDTH / 2) + 8, SCORE_BOARD_HEIGHT - bottomMarigin);
 
 			context.textAlign = "left";
-			context.fillText("Score : " + score, horizontalMargin, SCORE_BOARD_HEIGHT - bottomMarigin);
+			context.fillText("Score : " + score, BOARD_WIDTH / 2.2, SCORE_BOARD_HEIGHT - bottomMarigin);
 
 			for (var i = 0; i < snakeArray.length; i++) {
 				context.drawImage(snakeImage[snakeArray[i].style], snakeArray[i].x, snakeArray[i].y);
 			}
 
 			context.drawImage(server.image, server.x, server.y);
-			console.log("game level " + gameLevel);
 			if (obstractleIntro) {
 				context.drawImage(obstracleObject.image, obstracleObject.x, obstracleObject.y);
 			}		
@@ -339,7 +346,6 @@ startgame = function () {
 					ChangeSpeed();
 					setSpeed(snakeSpeed);
 				}
-				console.log("during level change" + snakeSpeed);
 				gameLevel += 1;
 				isLevelChanged = true;
 				fadeLevelChange();
@@ -351,38 +357,48 @@ startgame = function () {
 		}
 
 		if (snakeArray[0].x === BOARD_WIDTH || snakeArray[0].y === BOARD_HEIGHT + MOVE_PX || snakeArray[0].x === 0 - MOVE_PX || snakeArray[0].y === 0) {
+			context.textAlign = 'bottom';
 			context.fillStyle = "white";
-			context.fillText("Game Over, Please press 'R' to Restart", BOARD_WIDTH / 8, BOARD_HEIGHT / 2);
+			context.font = "italic 12pt Arial";
+			context.fillText("Game Over, Please press 'R' to Restart", BOARD_WIDTH / 3.4, BOARD_HEIGHT);
+			var scoreBeforeGameOver = score;
+			document.getElementById("twitterShare").href = "https://twitter.com/home?status=I scored: " + scoreBeforeGameOver + " %23" + randomHash(scoreBeforeGameOver) + " %23" + "InServerlessGame";
 			isGameOver = true;
 		}
 
 		for (let i = 1; i < snakeArray.length - 1; i++) {
 			if (snakeArray[0].x === snakeArray[i].x && snakeArray[0].y === snakeArray[i].y) {
+				context.textAlign = 'bottom';
 				context.fillStyle = "white";
-				context.fillText("Game Over, Please press 'R' to Restart", BOARD_WIDTH / 8, BOARD_HEIGHT / 2);
+				context.font = "italic 12pt Arial";
+				context.fillText("Game Over, Please press 'R' to Restart", BOARD_WIDTH / 3.4, BOARD_HEIGHT);
+				var scoreBeforeGameOver = score;
+				document.getElementById("twitterShare").href = "https://twitter.com/home?status=I scored: " + scoreBeforeGameOver + " %23" + randomHash(scoreBeforeGameOver) + " %23" + "InServerlessGame";
 				isGameOver = true;
 			}
 
 		}
 
 		if (gameLevel > obstracleIntroLevel && snakeArray[0].x === obstracleObject.x && snakeArray[0].y === obstracleObject.y) {
+			context.textAlign = 'bottom';
 			context.fillStyle = "white";
-			context.fillText("Game Over, Please press 'R' to Restart", BOARD_WIDTH / 8, BOARD_HEIGHT / 2);
+			context.font = "italic 12pt Arial";
+			context.fillText("Game Over, Please press 'R' to Restart", BOARD_WIDTH / 3.4, BOARD_HEIGHT);
+			var scoreBeforeGameOver = score;
+			document.getElementById("twitterShare").href = "https://twitter.com/home?status=I scored: " + scoreBeforeGameOver + " %23" + randomHash(scoreBeforeGameOver) + " %23" + "InServerlessGame";
 			isGameOver = true;
 		}
-		console.log("is L" + isLevelChanged);
-		//if(!isLevelChanged){
 			drawBoard();
-		//}
 		
 		function fadeLevelChange(){
 		if(isLevelChanged){
 			var alpha = 1.0, 
 			interval = setInterval(function () {
 				//context.width = context.width; // Clears the canvas
+				context.textAlign = 'top';
 				context.fillStyle = "rgba(255, 255, 255, " + alpha + ")";
-				context.font = "italic 50pt Arial";
-				context.fillText("   Level "+gameLevel, BOARD_WIDTH / 8, BOARD_HEIGHT / 2);
+				context.font = "italic 30pt Arial";
+				context.fillText("   Level "+gameLevel, BOARD_WIDTH / 3, BOARD_HEIGHT / 8);
 				alpha = alpha - 0.05; // decrease opacity (fade out)
 				if (alpha < 0) {
 					//context.width = context.width;
@@ -396,6 +412,32 @@ startgame = function () {
 		
 	}
 	
+function jsonCallback(json){
+	console.log(json);
+}	
+
+function randomHash(score){
+	var has = ""; 
+	
+	$.ajax({
+	async: false,
+	url: 'https://o136z8hk40.execute-api.us-east-1.amazonaws.com/prod/encode_score?score=' + score,
+	type: 'GET',
+	crossDomain: true,
+	contentType: 'application/json',
+	dataType: 'json',
+	success: function(data) {
+			console.log(data.id)
+			has = data.id//success stuff. data here is the response, not your original data
+	},
+	error: function(xhr, ajaxOptions, thrownError) {
+				console.log("test failed")//error handling stuff
+	}
+});
+
+return has;
+
+}
 	
 	
 	// function gameOver() {

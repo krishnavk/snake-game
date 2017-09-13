@@ -34,6 +34,7 @@
   visibility: hidden;
   opacity: 0;
 }
+
 .overlay:target {
   visibility: visible;
   opacity: 1;
@@ -42,28 +43,44 @@
 .popup {
   margin: 70px auto;
   padding: 20px;
-  background: #fff;
-  border-radius: 5px;
-  width: 30%;
+  background: #C2C96A;
   position: relative;
   transition: all 5s ease-in-out;
+  width: 680px;
+  height: 488px;
+  margin-top: 5px;
 }
 
-.popup h2 {
-  margin-top: 0;
-  color: #333;
-  font-family: Tahoma, Arial, sans-serif;
+canvas {
+  display: table;
+  margin-left: -20px;
 }
-.popup .close {
+
+.social-media {
+  display:block;
+  text-align:center;
+}
+
+
+.popup .social-media {
   position: absolute;
   top: 20px;
-  right: 30px;
-  transition: all 200ms;
-  font-size: 30px;
-  font-weight: bold;
+  right: 70px;
   text-decoration: none;
   color: #333;
 }
+
+.popup h3 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+  text-align: center;
+}
+
+.icon-background {
+  color: red;
+}
+
 .popup .close:hover {
   color: #06D85F;
 }
@@ -79,4 +96,19 @@
   .popup{
     width: 70%;
   }
+}
+
+
+.play-button {
+  margin-top: 70px;
+  font-size:150px;
+  color:red;
+  text-decoration:none;
+}
+
+.play-button:hover {
+  position: relative;
+  color: red;
+  font-size: 200px;
+  text-decoration: none;
 }

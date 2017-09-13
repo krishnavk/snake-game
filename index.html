@@ -1,8 +1,12 @@
 <html>
 
 <head>
-<link rel="stylesheet" type="text/css" href="css/style.css">
 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+  
 </head>
 
 <body>
@@ -30,16 +34,42 @@
 		var topscore = 0;
 	</script>
 	<div class="box" onclick="startgame()">
-		<a class="button" href="#popup1">Eat many servers</a>
+		<a class="play-button fa fa-play-circle" href="#popup1" title="Eat many Servers"></a>
 	</div>
 
 	<div id="popup1" class="overlay">
 		<div class="popup">
-			<h2>Enjoy Eating Servers</h2>
-			<a class="close" href="#">&times;</a>
-			<canvas id="board" height="660" width="480"></canvas>
+
+			<h3>Enjoy Eating Servers</h3>
+			<canvas id="board" height="560" width="680"></canvas>
+			<div class="row social-media">
+				<span class="fa-stack fa-1x">
+					<a id="twitterShare" href="https://twitter.com/home?status=I scored: 300. Could you beat me https://ashvinikumar.github.io/snake-game/"
+						 target="_blank" title="Tweet your score">
+						<i class="fa fa-circle fa-stack-2x"></i>
+						<i class="fa fa-twitter fa-stack-1x fa-inverse" aria-hidden="true"></i>
+					</a>
+				</span>
+				<span class="fa-stack fa-1x">
+					<a href="https://twitter.com/ashvinimaurya" target="_blank" title="Share your score">
+						<i class="fa fa-circle fa-stack-2x"></i>
+						<i class="fa fa-facebook fa-stack-1x fa-inverse" aria-hidden="true"></i>
+					</a>
+				</span>
+				<span class="fa-stack fa-1x">
+					<a href="#" title="Close this window" id="close">
+						<i class="fa fa-circle fa-stack-2x icon-background"></i>
+						<i class="fa fa-times fa-stack-1x fa-inverse" aria-hidden="true"></i>
+					</a>
+				</span>
+			</div>	
 		</div>
 	</div>
+
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>	
 </body>
 
 </html>
