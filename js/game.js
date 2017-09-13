@@ -90,7 +90,6 @@ startgame = function () {
 	init();
 	function setSpeed(snakeSpeed) {
 		currentSpeed = setInterval(() => {
-			// console.log("snake speed in set interval " + snakeSpeed);
 			moveSnake();
 		}, snakeSpeed);
 	}
@@ -167,7 +166,6 @@ startgame = function () {
 		}
 		obstracleObject.x = randomPoint.x;
 		obstracleObject.y = randomPoint.y;
-		// console.log("test");
 	}
 
 	function getRandomPoint() {
@@ -223,7 +221,6 @@ startgame = function () {
 			}
 
 			context.drawImage(server.image, server.x, server.y);
-			// console.log("game level " + gameLevel);
 			if (obstractleIntro) {
 				context.drawImage(obstracleObject.image, obstracleObject.x, obstracleObject.y);
 			}		
@@ -345,7 +342,6 @@ startgame = function () {
 					ChangeSpeed();
 					setSpeed(snakeSpeed);
 				}
-				// console.log("during level change" + snakeSpeed);
 				gameLevel += 1;
 				isLevelChanged = true;
 				fadeLevelChange();
@@ -388,10 +384,7 @@ startgame = function () {
 			document.getElementById("twitterShare").href = "https://twitter.com/home?status=I scored: " + scoreBeforeGameOver + " %23" + randomHash(scoreBeforeGameOver) + " %23" + "InServerlessGame";
 			isGameOver = true;
 		}
-		// console.log("is L" + isLevelChanged);
-		//if(!isLevelChanged){
 			drawBoard();
-		//}
 		
 		function fadeLevelChange(){
 		if(isLevelChanged){
