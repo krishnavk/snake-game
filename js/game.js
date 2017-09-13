@@ -49,6 +49,11 @@ startgame = function () {
 			var escapeEvent = document.getElementById('close');
 			escapeEvent.click()
 		}
+
+		// if (snakeDirection === "right" && (event.keyCode === 37 && event.keyCode === 38)) {
+		// 	snakeDirection = "up"
+		// }
+
 		if (snakeDirection === "right" && event.keyCode === 37) {
 			return
 		}
@@ -61,6 +66,7 @@ startgame = function () {
 		if (snakeDirection === "down" && event.keyCode === 38) {
 			return
 		}
+
 		switch (event.keyCode) {
 			case 38:
 				snakeDirection = "up";

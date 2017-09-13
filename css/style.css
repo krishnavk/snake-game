@@ -97,3 +97,18 @@ canvas {
     width: 70%;
   }
 }
+
+
+.play-button {
+  margin-top: 70px;
+  font-size:150px;
+  color:red;
+  text-decoration:none;
+}
+
+.play-button:hover {
+  position: relative;
+  color: red;
+  font-size: 200px;
+  text-decoration: none;
+}
