@@ -356,7 +356,7 @@ startgame = function () {
 			context.font = "italic 12pt Arial";
 			context.fillText("Game Over, Please press 'R' to Restart", BOARD_WIDTH / 3.4, BOARD_HEIGHT);
 			var scoreBeforeGameOver = score;
-			document.getElementById("twitterShare").href = "https://twitter.com/home?status=I scored: " + scoreBeforeGameOver + " %23" + randomHash(scoreBeforeGameOver);
+			document.getElementById("twitterShare").href = "https://twitter.com/home?status=I scored: " + scoreBeforeGameOver + " %23" + randomHash(scoreBeforeGameOver) + " %23" + "InServerlessGame";
 			isGameOver = true;
 		}
 
@@ -367,7 +367,7 @@ startgame = function () {
 				context.font = "italic 12pt Arial";
 				context.fillText("Game Over, Please press 'R' to Restart", BOARD_WIDTH / 3.4, BOARD_HEIGHT);
 				var scoreBeforeGameOver = score;
-				document.getElementById("twitterShare").href = "https://twitter.com/home?status=I scored: " + scoreBeforeGameOver;
+				document.getElementById("twitterShare").href = "https://twitter.com/home?status=I scored: " + scoreBeforeGameOver + " %23" + randomHash(scoreBeforeGameOver) + " %23" + "InServerlessGame";
 				isGameOver = true;
 			}
 
@@ -379,7 +379,7 @@ startgame = function () {
 			context.font = "italic 12pt Arial";
 			context.fillText("Game Over, Please press 'R' to Restart", BOARD_WIDTH / 3.4, BOARD_HEIGHT);
 			var scoreBeforeGameOver = score;
-			document.getElementById("twitterShare").href = "https://twitter.com/home?status=I scored: " + scoreBeforeGameOver;
+			document.getElementById("twitterShare").href = "https://twitter.com/home?status=I scored: " + scoreBeforeGameOver + " %23" + randomHash(scoreBeforeGameOver) + " %23" + "InServerlessGame";
 			isGameOver = true;
 		}
 		// console.log("is L" + isLevelChanged);
@@ -410,31 +410,31 @@ startgame = function () {
 	}
 	
 function jsonCallback(json){
-			console.log(json);
-		}	
+	console.log(json);
+}	
 
-	function randomHash(score){
-		var has = ""; 
-		
-		$.ajax({
-		async: false,
-    url: 'https://o136z8hk40.execute-api.us-east-1.amazonaws.com/prod/encode_score?score=' + score,
-    type: 'GET',
-    crossDomain: true,
-    contentType: 'application/json',
-    dataType: 'json',
-    success: function(data) {
-				console.log(data.id)
-        has = data.id//success stuff. data here is the response, not your original data
-    },
-    error: function(xhr, ajaxOptions, thrownError) {
-         console.log("test failed")//error handling stuff
-    }
-	});
-
-	return has;
-
+function randomHash(score){
+	var has = ""; 
+	
+	$.ajax({
+	async: false,
+	url: 'https://o136z8hk40.execute-api.us-east-1.amazonaws.com/prod/encode_score?score=' + score,
+	type: 'GET',
+	crossDomain: true,
+	contentType: 'application/json',
+	dataType: 'json',
+	success: function(data) {
+			console.log(data.id)
+			has = data.id//success stuff. data here is the response, not your original data
+	},
+	error: function(xhr, ajaxOptions, thrownError) {
+				console.log("test failed")//error handling stuff
 	}
+});
+
+return has;
+
+}
 	
 	
 	// function gameOver() {
