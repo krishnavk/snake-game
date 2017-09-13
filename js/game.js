@@ -131,8 +131,12 @@ startgame = function () {
 		setSpeed(snakeSpeed);
 	}
 	function reset() {
-		score = 0;
+		isGameOver = false;
+		isLevelChanged = false;
+		i = 0;
+		gameOver = false;
 		gameLevel = 1;
+
 		snakeSpeed = 150;
 		serversCreated = 0;
 		//snakeSpeed = 160;
