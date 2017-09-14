@@ -42,6 +42,7 @@ startgame = function () {
 	var gameLevelChange = 5;
 	var obstracleIntroLevel = 5;
 	var obstractleIntro = false;
+	var isKeyPressed =false;
 
 
 	document.addEventListener('keydown', (event) => {
@@ -66,6 +67,12 @@ startgame = function () {
 		if (snakeDirection === "down" && event.keyCode === 38) {
 			return
 		}
+
+		if(!isKeyPressed){
+			return
+		}
+
+		isKeyPressed = false;
 
 		switch (event.keyCode) {
 			case 38:
@@ -139,9 +146,10 @@ startgame = function () {
 
 		snakeSpeed = 150;
 		serversCreated = 0;
-		//snakeSpeed = 160;
+		score =0;
 		ChangeSpeed();
 		obstractleIntro = false;
+		isKeyPressed = false;
 	}
 
 	function buildSnake() {
@@ -247,7 +255,10 @@ startgame = function () {
 		} if (snakeDirection === "down") {
 			snakeArray.unshift({ x: x_temp, y: y_temp + MOVE_PX, style: "headdown" })
 		}
+		
 		var tmpItem = snakeArray.pop();
+		isKeyPressed = true;
+
 		for (i = 1; i < snakeArray.length - 1; i++) {
 			if (snakeArray[i].y === snakeArray[i - 1].y && snakeArray[i].y === snakeArray[i + 1].y)
 				snakeArray[i].style = "bodyx";
@@ -412,9 +423,6 @@ startgame = function () {
 		
 	}
 	
-function jsonCallback(json){
-	console.log(json);
-}	
 
 function randomHash(score){
 	var has = ""; 
@@ -427,12 +435,9 @@ function randomHash(score){
 	contentType: 'application/json',
 	dataType: 'json',
 	success: function(data) {
-			console.log(data.id)
 			has = data.id//success stuff. data here is the response, not your original data
-	},
-	error: function(xhr, ajaxOptions, thrownError) {
-				console.log("test failed")//error handling stuff
 	}
+
 });
 
 return has;
